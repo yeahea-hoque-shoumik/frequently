@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.prime.frequently.databinding.FragmentHistoryBinding
+import com.prime.frequently.databinding.FragmentLibraryBinding
 
-class HistoryFragment : Fragment() {
+class LibraryFragment : Fragment() {
 
-    private var _b: FragmentHistoryBinding? = null
+    private var _b: FragmentLibraryBinding? = null
     private val b get() = _b!!
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class HistoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _b = FragmentHistoryBinding.inflate(inflater, container, false)
+        _b = FragmentLibraryBinding.inflate(inflater, container, false)
         return b.root
     }
 

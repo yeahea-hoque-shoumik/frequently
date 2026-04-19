@@ -129,7 +129,7 @@ com.prime.frequently/
 | 4 | Preset wave categories (data model + RecyclerView UI) | ⬜ Not started |
 | 5 | Custom Hz input (sliders + live preview) | ⬜ Not started |
 | 6 | Session history (Room DB + HistoryFragment) | ⬜ Not started |
-| 7 | Main UI (HomeFragment + BottomNavigation) | ⬜ Not started |
+| 7 | Main UI (HomeFragment + BottomNavigation) | ✅ Done |
 | 8 | Settings (PreferenceFragment + headphone detection) | ⬜ Not started |
 | 9 | Background playback (ForegroundService + notification) | ⬜ Not started |
 | 10 | Polish + testing + release APK | ⬜ Not started |
