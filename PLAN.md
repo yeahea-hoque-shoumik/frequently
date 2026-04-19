@@ -9,10 +9,7 @@ UX: user should be able to
 3. check previous listen history
 4. mixup a new kind of track by stacking multiple kind/hz of beats on sequential order. each sequence having distinct times if needed.
 5. save all the created tracks on device.
-6. 
 > **Decision:** Building in Native Android (Kotlin + Android Studio)  for maximum audio performance, full platform API access, and tighter control over the `AudioTrack` low-level audio engine.
-> 
-
 ## Feature Priority Summary
 
 | Priority | Feature | Why |
@@ -43,7 +40,7 @@ UX: user should be able to
 | `Adhan` (optional) | Prayer time calculation |
 | `Gson` or `kotlinx.serialization` | Journey JSON export/import |
 
-> **Note:** No Flutter packages. No third-party audio library. The entire audio engine is built on Android's native `AudioTrack` API — giving maximum control, minimum latency, and smallest APK size.
+> **Note:** No third-party audio library. The entire audio engine is built on Android's native `AudioTrack` API — giving maximum control, minimum latency, and smallest APK size.
 > 
 
 ---

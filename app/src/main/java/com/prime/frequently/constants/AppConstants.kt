@@ -15,4 +15,7 @@ object AppConstants {
     const val NOTIFICATION_ID = 1001
 
     const val DB_NAME = "frequently.db"
+
+    // Timer preset chips shown in UI (Phase 3 / 7)
+    val TIMER_PRESET_MINUTES = listOf(5, 10, 20, 30, 45, 60, 90)
 }

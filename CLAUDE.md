@@ -124,8 +124,8 @@ com.prime.frequently/
 |---|---|---|
 | 0 | Environment setup, project scaffold | ✅ Done |
 | 1 | Audio engine (AudioTrack + SineWaveGenerator + BinauralPlayer) | ✅ Done |
-| 2 | Background noise mixer (NoiseGenerator + mixing) | ⬜ Not started |
-| 3 | Timer system (coroutine countdown + auto-stop) | ⬜ Not started |
+| 2 | Background noise mixer (NoiseGenerator + mixing) | ✅ Done |
+| 3 | Timer system (coroutine countdown + auto-stop) | ✅ Done |
 | 4 | Preset wave categories (data model + RecyclerView UI) | ⬜ Not started |
 | 5 | Custom Hz input (sliders + live preview) | ⬜ Not started |
 | 6 | Session history (Room DB + HistoryFragment) | ⬜ Not started |
@@ -158,7 +158,7 @@ com.prime.frequently/
 | `ui/SettingsFragment.kt` | Skeleton — Phase 8 |
 | `ui/JourneyBuilderFragment.kt` | Skeleton — Phase 11.3 |
 | `audio/SineWaveGenerator.kt` | ✅ Stereo PCM, continuous phase tracking, amplitude=1.0 output |
-| `audio/NoiseGenerator.kt` | White + brown done; pink (Voss-McCartney) — Phase 2 |
+| `audio/NoiseGenerator.kt` | ✅ White, pink (Voss-McCartney 7-row), brown — all three generators complete |
 | `audio/BinauralPlayer.kt` | ✅ Full: AudioTrack MODE_STREAM, MAX_PRIORITY thread, 500ms fade in/out, noise mixing wired |
 | `audio/AudioEngine.kt` | Stub — used in Phase 11.2 (progressive transitions) |
 | `service/AudioForegroundService.kt` | Stub — Phase 9 |
@@ -356,4 +356,4 @@ The app is **dark-only**. No light mode. Background is near-black with a cosmic 
 
 ---
 
-*Last updated: Phase 1 complete — BinauralPlayer fully implemented (AudioTrack, background thread, 500ms fade in/out, noise mixing wired). HomeViewModel StateFlows live. App builds and runs.*
+*Last updated: Phase 2 complete — NoiseGenerator: white, pink (Voss-McCartney 7-row), brown all implemented. Mixing already live in BinauralPlayer buffer loop (per-sample, with clip prevention). Builds clean.*
