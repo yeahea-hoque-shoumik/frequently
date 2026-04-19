@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dashed border "add segment" button -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#05FFFFFF" />
+    <stroke android:width="1dp" android:color="@color/line_2" android:dashWidth="4dp" android:dashGap="3dp" />
+    <corners android:radius="@dimen/radius_card_sm" />
+</shape>

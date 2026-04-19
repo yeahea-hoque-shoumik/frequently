@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Deep Space design system — mirrors CSS variables in styles.css -->
+    <color name="bg_0">#FF05060D</color>
+    <color name="bg_1">#FF0A0C18</color>
+    <color name="bg_2">#FF10132A</color>
+    <color name="bg_3">#FF181C3A</color>
+    <color name="line">#14FFFFFF</color>
+    <color name="line_2">#24FFFFFF</color>
+    <color name="ink">#FFF3F1FF</color>
+    <color name="ink_dim">#FFA5A3C9</color>
+    <color name="ink_mute">#FF6C6A92</color>
+    <color name="violet">#FF8B7DFF</color>
+    <color name="violet_2">#FFA594FF</color>
+    <color name="cyan_accent">#FF5EF0E3</color>
+    <color name="magenta_accent">#FFFF7FD4</color>
+    <color name="amber_accent">#FFFFC56B</color>
+    <color name="danger">#FFFF6A8B</color>
+
+    <!-- Wave band swatches -->
+    <color name="band_delta_hi">#FF3B3A8F</color>
+    <color name="band_delta_lo">#FF1A1B3A</color>
+    <color name="band_theta_hi">#FF6B4FD1</color>
+    <color name="band_theta_lo">#FF241A55</color>
+    <color name="band_alpha_hi">#FF3AB5C8</color>
+    <color name="band_alpha_lo">#FF12323A</color>
+    <color name="band_beta_hi">#FF3FC79A</color>
+    <color name="band_beta_lo">#FF0E3128</color>
+    <color name="band_gamma_hi">#FFFFB347</color>
+    <color name="band_gamma_lo">#FF3A2608</color>
+
+    <!-- Material 3 color roles (dark scheme) -->
+    <color name="colorPrimary">#FF8B7DFF</color>
+    <color name="colorOnPrimary">#FF0A0C18</color>
+    <color name="colorPrimaryContainer">#FF241A55</color>
+    <color name="colorOnPrimaryContainer">#FFD4C9FF</color>
+    <color name="colorSecondary">#FF5EF0E3</color>
+    <color name="colorOnSecondary">#FF0A0C18</color>
+    <color name="colorSecondaryContainer">#FF0D2E2B</color>
+    <color name="colorOnSecondaryContainer">#FF9CFAF3</color>
+    <color name="colorTertiary">#FFFF7FD4</color>
+    <color name="colorOnTertiary">#FF0A0C18</color>
+    <color name="colorTertiaryContainer">#FF3A1025</color>
+    <color name="colorOnTertiaryContainer">#FFFFD8EC</color>
+    <color name="colorBackground">#FF05060D</color>
+    <color name="colorOnBackground">#FFF3F1FF</color>
+    <color name="colorSurface">#FF0A0C18</color>
+    <color name="colorOnSurface">#FFF3F1FF</color>
+    <color name="colorSurfaceVariant">#FF10132A</color>
+    <color name="colorOnSurfaceVariant">#FFA5A3C9</color>
+    <color name="colorOutline">#FF6C6A92</color>
+    <color name="colorOutlineVariant">#FF292B44</color>
+    <color name="colorError">#FFFF6A8B</color>
+    <color name="colorOnError">#FF0A0C18</color>
+    <color name="colorErrorContainer">#FF3A0D18</color>
+    <color name="colorOnErrorContainer">#FFFFC4CF</color>
 </resources>

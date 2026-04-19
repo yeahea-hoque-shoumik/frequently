@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/bg_0"
+    android:paddingHorizontal="@dimen/spacing_lg">
+
+    <!-- Back + title bar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_xl"
+        android:paddingBottom="@dimen/spacing_md">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/icon_btn_size"
+            android:layout_height="@dimen/icon_btn_size"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back"
+            android:background="@drawable/bg_icon_btn"
+            android:contentDescription="@string/action_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/screen_custom_hz"
+            android:textColor="@color/ink"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium" />
+
+    </RelativeLayout>
+
+    <!-- Hz display -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/bg_card"
+        android:padding="@dimen/spacing_xl"
+        android:layout_marginTop="@dimen/spacing_lg">
+
+        <TextView
+            android:id="@+id/tv_hz_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/custom_hz_default"
+            android:textColor="@color/ink"
+            android:textSize="64sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/unit_hz"
+            android:textColor="@color/ink_dim"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_band_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:textColor="@color/violet"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <!-- Slider -->
+    <SeekBar
+        android:id="@+id/slider_hz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xl"
+        android:max="100"
+        android:thumbTint="@color/violet"
+        android:progressTint="@color/violet"
+        android:progressBackgroundTint="@color/line_2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/custom_hz_min"
+            android:textColor="@color/ink_mute"
+            android:textSize="11sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/custom_hz_max"
+            android:textColor="@color/ink_mute"
+            android:textSize="11sp"
+            android:fontFamily="monospace" />
+
+    </RelativeLayout>
+
+    <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
+
+    <!-- Play button -->
+    <ImageButton
+        android:id="@+id/btn_play"
+        android:layout_width="@dimen/play_btn_size"
+        android:layout_height="@dimen/play_btn_size"
+        android:layout_marginBottom="@dimen/spacing_xl"
+        android:src="@drawable/ic_play"
+        android:background="@drawable/bg_play_button"
+        android:contentDescription="@string/action_play" />
+
+</LinearLayout>

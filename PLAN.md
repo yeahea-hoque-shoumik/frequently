@@ -2,6 +2,14 @@
 
 A step-by-step plan to build a binaural beat generator app in **Native Android (Kotlin)** with preset wave categories, custom Hz input, timer, session history, background noise mixer, and advanced features.
 
+UX: user should be able to 
+
+1. listen to binaural beats in a music player like interface
+2. change different types of binaural beats, base hz, timer to listen, volume
+3. check previous listen history
+4. mixup a new kind of track by stacking multiple kind/hz of beats on sequential order. each sequence having distinct times if needed.
+5. save all the created tracks on device.
+6. 
 > **Decision:** Building in Native Android (Kotlin + Android Studio)  for maximum audio performance, full platform API access, and tighter control over the `AudioTrack` low-level audio engine.
 > 
 
@@ -1033,9 +1041,3 @@ Include in description:
 > 
 
 These four statements are verifiable by any user — they create deep trust.
-
----
-
----
-
-*Updated by Claude — April 15, 2026 (migrated from Flutter to Native Android / Kotlin)*

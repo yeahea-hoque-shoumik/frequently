@@ -1,0 +1,110 @@
+/* Frequently — Deep Space design system */
+:root {
+  --bg-0: #05060d;
+  --bg-1: #0a0c18;
+  --bg-2: #10132a;
+  --bg-3: #181c3a;
+  --line: rgba(255,255,255,0.08);
+  --line-2: rgba(255,255,255,0.14);
+  --ink: #f3f1ff;
+  --ink-dim: #a5a3c9;
+  --ink-mute: #6c6a92;
+  --violet: #8b7dff;
+  --violet-2: #a594ff;
+  --cyan: #5ef0e3;
+  --magenta: #ff7fd4;
+  --amber: #ffc56b;
+  --danger: #ff6a8b;
+  --glow-v: 0 0 40px rgba(139,125,255,0.45);
+  --glow-c: 0 0 40px rgba(94,240,227,0.35);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  background: #050609;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+.display { font-family: 'Space Grotesk', 'Inter', sans-serif; letter-spacing: -0.02em; }
+.mono    { font-family: 'JetBrains Mono', monospace; letter-spacing: -0.01em; }
+
+/* Screen background — cosmic gradient */
+.cosmic-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(139,125,255,0.25), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 100% 100%, rgba(94,240,227,0.12), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 0% 80%, rgba(255,127,212,0.10), transparent 60%),
+    #05060d;
+  position: relative;
+  overflow: hidden;
+}
+.cosmic-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 90% 50%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 45% 15%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 75% 85%, rgba(255,255,255,0.6), transparent);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Utility */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line);
+  font-size: 12px; color: var(--ink-dim);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+}
+.chip.active {
+  background: rgba(139,125,255,0.18);
+  border-color: rgba(139,125,255,0.45);
+  color: var(--violet-2);
+}
+
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.divider { height: 1px; background: var(--line); }
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+
+/* Scrollbar hide */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Breathing pulse for orb */
+@keyframes breath {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+@keyframes drift {
+  0%, 100% { transform: translate(0,0); }
+  33% { transform: translate(4px, -3px); }
+  66% { transform: translate(-3px, 4px); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}

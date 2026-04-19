@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen padding — matches design's 20px horizontal padding -->
+    <dimen name="screen_padding_h">20dp</dimen>
+    <dimen name="screen_padding_v">16dp</dimen>
+
+    <!-- Spacing scale -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_xl">20dp</dimen>
+    <dimen name="spacing_xxl">24dp</dimen>
+
+    <!-- Border radii -->
+    <dimen name="radius_pill">100dp</dimen>       <!-- 999px chips -->
+    <dimen name="radius_card_sm">14dp</dimen>
+    <dimen name="radius_card">16dp</dimen>
+    <dimen name="radius_card_lg">20dp</dimen>
+    <dimen name="radius_icon_btn">12dp</dimen>
+
+    <!-- Component sizes -->
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="chip_height">32dp</dimen>
+    <dimen name="icon_btn_size">40dp</dimen>
+    <dimen name="play_btn_size">72dp</dimen>
+    <dimen name="mini_orb_size">40dp</dimen>
+    <dimen name="preset_orb_size">44dp</dimen>
+    <dimen name="segment_orb_size">36dp</dimen>
+    <dimen name="saved_track_orb_size">56dp</dimen>
+    <dimen name="visualizer_size">260dp</dimen>
+    <dimen name="timer_dial_size">240dp</dimen>
+
+    <!-- Progress bar -->
+    <dimen name="progress_track_height">4dp</dimen>
+    <dimen name="progress_thumb_size">12dp</dimen>
+
+    <!-- Slider -->
+    <dimen name="slider_track_height">6dp</dimen>
+    <dimen name="slider_thumb_size">18dp</dimen>
+
+    <!-- Bottom navigation -->
+    <dimen name="bottom_nav_elevation">8dp</dimen>
+
+    <!-- Typography — matching design font sizes -->
+    <dimen name="text_hero">28sp</dimen>
+    <dimen name="text_display_lg">44sp</dimen>
+    <dimen name="text_display_xl">68sp</dimen>
+    <dimen name="text_display_hz">72sp</dimen>
+    <dimen name="text_title">22sp</dimen>
+    <dimen name="text_body_lg">15sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_body_sm">13sp</dimen>
+    <dimen name="text_label">12sp</dimen>
+    <dimen name="text_caption">11sp</dimen>
+    <dimen name="text_micro">10sp</dimen>
+    <dimen name="text_nano">9sp</dimen>
+
+    <!-- Bar chart -->
+    <dimen name="chart_height">90dp</dimen>
+
+    <!-- Band chip in player -->
+    <dimen name="band_chip_height">32dp</dimen>
+</resources>

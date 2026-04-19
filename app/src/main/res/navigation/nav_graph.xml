@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/libraryFragment">
+
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.prime.frequently.ui.LibraryFragment"
+        android:label="@string/nav_library"
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_library_to_player"
+            app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_library_to_customHz"
+            app:destination="@id/customHzFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.prime.frequently.ui.PlayerFragment"
+        android:label="@string/nav_player"
+        tools:layout="@layout/fragment_player">
+        <action
+            android:id="@+id/action_player_to_timer"
+            app:destination="@id/timerFragment" />
+        <action
+            android:id="@+id/action_player_to_mixer"
+            app:destination="@id/mixerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/builderFragment"
+        android:name="com.prime.frequently.ui.BuilderFragment"
+        android:label="@string/nav_build"
+        tools:layout="@layout/fragment_builder">
+        <action
+            android:id="@+id/action_builder_to_saved"
+            app:destination="@id/savedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.prime.frequently.ui.HistoryFragment"
+        android:label="@string/nav_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.prime.frequently.ui.SettingsFragment"
+        android:label="@string/nav_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/customHzFragment"
+        android:name="com.prime.frequently.ui.CustomHzFragment"
+        android:label="@string/screen_custom_hz"
+        tools:layout="@layout/fragment_custom_hz" />
+
+    <fragment
+        android:id="@+id/timerFragment"
+        android:name="com.prime.frequently.ui.TimerFragment"
+        android:label="@string/screen_timer"
+        tools:layout="@layout/fragment_timer" />
+
+    <fragment
+        android:id="@+id/mixerFragment"
+        android:name="com.prime.frequently.ui.MixerFragment"
+        android:label="@string/screen_mixer"
+        tools:layout="@layout/fragment_mixer" />
+
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.prime.frequently.ui.SavedFragment"
+        android:label="@string/screen_saved"
+        tools:layout="@layout/fragment_saved" />
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.prime.frequently.ui.OnboardingFragment"
+        android:label="@string/screen_onboarding"
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onboarding_to_library"
+            app:destination="@id/libraryFragment"
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>
