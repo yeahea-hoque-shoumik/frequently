@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.prime.frequently.R
 import com.prime.frequently.constants.AppConstants
 import com.prime.frequently.databinding.FragmentPlayerBinding
@@ -40,6 +41,7 @@ class PlayerFragment : Fragment() {
         val carrierRange = (AppConstants.CARRIER_HZ_MAX - AppConstants.CARRIER_HZ_MIN).toInt()
         b.sliderCarrier.max = carrierRange
 
+        b.btnBack.setOnClickListener { findNavController().navigateUp() }
         b.btnPlayPause.setOnClickListener { vm.togglePlayPause() }
 
         b.sliderCarrier.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
