@@ -126,7 +126,7 @@ com.prime.frequently/
 | 1 | Audio engine (AudioTrack + SineWaveGenerator + BinauralPlayer) | ✅ Done |
 | 2 | Background noise mixer (NoiseGenerator + mixing) | ✅ Done |
 | 3 | Timer system (coroutine countdown + auto-stop) | ✅ Done |
-| 4 | Preset wave categories (data model + RecyclerView UI) | ⬜ Not started |
+| 4 | Preset wave categories (data model + RecyclerView UI) | ✅ Done |
 | 5 | Custom Hz input (sliders + live preview) | ⬜ Not started |
 | 6 | Session history (Room DB + HistoryFragment) | ⬜ Not started |
 | 7 | Main UI (HomeFragment + BottomNavigation) | ✅ Done |
@@ -153,7 +153,8 @@ com.prime.frequently/
 |---|---|
 | `ui/MainActivity.kt` | Edge-to-edge host — nav graph wired in Phase 7 |
 | `ui/HomeFragment.kt` | Skeleton — Phase 7 |
-| `ui/PresetsFragment.kt` | Skeleton — Phase 4 |
+| `ui/LibraryFragment.kt` | ✅ Phase 4 — full: adapter, chip filters, search, nav to player |
+| `ui/WavePresetAdapter.kt` | ✅ Phase 4 — ListAdapter, 2-col grid, band gradient thumbnails |
 | `ui/HistoryFragment.kt` | Skeleton — Phase 6 |
 | `ui/SettingsFragment.kt` | Skeleton — Phase 8 |
 | `ui/JourneyBuilderFragment.kt` | Skeleton — Phase 11.3 |
@@ -171,7 +172,7 @@ com.prime.frequently/
 | `data/JourneyDao.kt` | Interface stub — Phase 11.3 |
 | `viewmodel/HomeViewModel.kt` | ✅ StateFlows: isPlaying, carrierHz, beatHz, volume, remainingSeconds; delegates to BinauralPlayer |
 | `viewmodel/HistoryViewModel.kt` | Stub — Phase 6 |
-| `viewmodel/PresetsViewModel.kt` | Stub — Phase 4 |
+| `viewmodel/PresetsViewModel.kt` | ✅ category filter + search query StateFlows |
 | `repository/SessionRepository.kt` | Stub — Phase 6 |
 | `repository/PresetRepository.kt` | Delegates to WavePresets constants |
 | `constants/WavePresets.kt` | All 18 presets defined (Delta→Spiritual) |

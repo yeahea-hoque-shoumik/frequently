@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/bg_0">
 
-    <!-- Header -->
+    <!-- Fixed header: title + search + chips + custom Hz card -->
     <LinearLayout
-        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/spacing_lg"
-        android:paddingTop="@dimen/spacing_xl"
-        android:paddingBottom="@dimen/spacing_md">
+        android:paddingTop="@dimen/spacing_xl">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- Title area -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@color/ink"
-            android:textSize="28sp"
-            android:fontFamily="sans-serif"
-            android:textStyle="bold"
-            android:letterSpacing="0.01" />
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/screen_padding_h"
+            android:paddingBottom="@dimen/spacing_md">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/library_headline"
+                android:textColor="@color/ink"
+                android:textSize="@dimen/text_hero"
+                android:fontFamily="sans-serif-medium" />
+
+        </LinearLayout>
 
         <!-- Search bar -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/icon_btn_size"
-            android:layout_marginTop="@dimen/spacing_md"
+            android:layout_marginHorizontal="@dimen/screen_padding_h"
+            android:layout_marginBottom="@dimen/spacing_md"
             android:background="@drawable/bg_search">
 
             <ImageView
@@ -50,22 +56,23 @@
                 android:hint="@string/hint_search"
                 android:textColorHint="@color/ink_mute"
                 android:textColor="@color/ink"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_body_sm"
                 android:background="@android:color/transparent"
                 android:inputType="text"
                 android:imeOptions="actionSearch"
                 android:singleLine="true" />
+
         </FrameLayout>
 
         <!-- Band filter chips -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_md"
+            android:paddingHorizontal="@dimen/screen_padding_h"
+            android:paddingBottom="@dimen/spacing_md"
             android:scrollbars="none">
 
             <LinearLayout
-                android:id="@+id/chip_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -77,7 +84,8 @@
                     android:paddingHorizontal="@dimen/spacing_md"
                     android:text="@string/band_all"
                     android:textColor="@color/ink"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_body_sm"
+                    android:fontFamily="monospace"
                     android:gravity="center"
                     android:background="@drawable/bg_chip_active" />
 
@@ -85,10 +93,12 @@
                     android:id="@+id/chip_delta"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/chip_height"
+                    android:layout_marginStart="@dimen/spacing_sm"
                     android:paddingHorizontal="@dimen/spacing_md"
                     android:text="@string/band_delta"
                     android:textColor="@color/ink_dim"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_body_sm"
+                    android:fontFamily="monospace"
                     android:gravity="center"
                     android:background="@drawable/bg_chip" />
 
@@ -96,10 +106,12 @@
                     android:id="@+id/chip_theta"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/chip_height"
+                    android:layout_marginStart="@dimen/spacing_sm"
                     android:paddingHorizontal="@dimen/spacing_md"
                     android:text="@string/band_theta"
                     android:textColor="@color/ink_dim"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_body_sm"
+                    android:fontFamily="monospace"
                     android:gravity="center"
                     android:background="@drawable/bg_chip" />
 
@@ -107,10 +119,12 @@
                     android:id="@+id/chip_alpha"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/chip_height"
+                    android:layout_marginStart="@dimen/spacing_sm"
                     android:paddingHorizontal="@dimen/spacing_md"
                     android:text="@string/band_alpha"
                     android:textColor="@color/ink_dim"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_body_sm"
+                    android:fontFamily="monospace"
                     android:gravity="center"
                     android:background="@drawable/bg_chip" />
 
@@ -118,10 +132,12 @@
                     android:id="@+id/chip_beta"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/chip_height"
+                    android:layout_marginStart="@dimen/spacing_sm"
                     android:paddingHorizontal="@dimen/spacing_md"
                     android:text="@string/band_beta"
                     android:textColor="@color/ink_dim"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_body_sm"
+                    android:fontFamily="monospace"
                     android:gravity="center"
                     android:background="@drawable/bg_chip" />
 
@@ -129,10 +145,12 @@
                     android:id="@+id/chip_gamma"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/chip_height"
+                    android:layout_marginStart="@dimen/spacing_sm"
                     android:paddingHorizontal="@dimen/spacing_md"
                     android:text="@string/band_gamma"
                     android:textColor="@color/ink_dim"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_body_sm"
+                    android:fontFamily="monospace"
                     android:gravity="center"
                     android:background="@drawable/bg_chip" />
 
@@ -140,26 +158,90 @@
                     android:id="@+id/chip_spiritual"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/chip_height"
+                    android:layout_marginStart="@dimen/spacing_sm"
                     android:paddingHorizontal="@dimen/spacing_md"
                     android:text="@string/band_spiritual"
                     android:textColor="@color/ink_dim"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/text_body_sm"
+                    android:fontFamily="monospace"
                     android:gravity="center"
                     android:background="@drawable/bg_chip" />
 
             </LinearLayout>
         </HorizontalScrollView>
+
+        <!-- Custom Hz card -->
+        <LinearLayout
+            android:id="@+id/btn_custom_hz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/screen_padding_h"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/spacing_lg"
+            android:background="@drawable/bg_card"
+            android:clickable="true"
+            android:focusable="true">
+
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_icon_btn">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_waves"
+                    android:contentDescription="@null" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/custom_freq_title"
+                    android:textColor="@color/ink"
+                    android:textSize="@dimen/text_body_lg"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/custom_freq_sub"
+                    android:textColor="@color/ink_dim"
+                    android:textSize="@dimen/text_caption"
+                    android:fontFamily="monospace" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/ic_plus"
+                android:contentDescription="@null" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <!-- Preset grid -->
+    <!-- Scrollable preset grid -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/preset_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/spacing_lg"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="@dimen/screen_padding_h"
         android:paddingBottom="80dp"
-        android:clipToPadding="false"
-        app:layout_anchor="@id/header"
-        app:layout_anchorGravity="bottom" />
+        android:clipToPadding="false" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

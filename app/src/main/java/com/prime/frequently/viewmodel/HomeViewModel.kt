@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prime.frequently.audio.BinauralPlayer
 import com.prime.frequently.audio.NoiseType
+import com.prime.frequently.data.WavePreset
 import com.prime.frequently.utils.FrequencyUtils
 import com.prime.frequently.utils.TimeUtils
 import kotlinx.coroutines.Job
@@ -30,6 +31,10 @@ enum class TimerState { IDLE, RUNNING, PAUSED, COMPLETED }
 class HomeViewModel : ViewModel() {
 
     private val player = BinauralPlayer()
+
+    // ── Current preset ────────────────────────────────────────────────────────
+    private val _currentPresetName = MutableStateFlow("")
+    val currentPresetName: StateFlow<String> = _currentPresetName.asStateFlow()
 
     // ── Playback ──────────────────────────────────────────────────────────────
     private val _isPlaying = MutableStateFlow(false)
@@ -151,6 +156,17 @@ class HomeViewModel : ViewModel() {
 
     fun setNoiseType(type: NoiseType) { player.noiseType = type }
     fun setNoiseVolume(vol: Float) { player.noiseVolume = vol }
+
+    // ── Preset ────────────────────────────────────────────────────────────────
+
+    fun applyPreset(preset: WavePreset) {
+        _carrierHz.value = preset.carrierHz
+        _beatHz.value = preset.beatHz
+        _currentPresetName.value = preset.name
+        player.noiseType = preset.noiseType
+        player.noiseVolume = preset.noiseVolume
+        if (_isPlaying.value) player.setFrequencies(freqLeft, freqRight)
+    }
 
     // ── Timer controls ────────────────────────────────────────────────────────
 
