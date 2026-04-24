@@ -128,7 +128,7 @@ com.prime.frequently/
 | 3 | Timer system (coroutine countdown + auto-stop) | ✅ Done |
 | 4 | Preset wave categories (data model + RecyclerView UI) | ✅ Done |
 | 5 | Custom Hz input (sliders + live preview) | ✅ Done |
-| 6 | Session history (Room DB + HistoryFragment) | ⬜ Not started |
+| 6 | Session history (Room DB + HistoryFragment) | ✅ Done |
 | 7 | Main UI (HomeFragment + BottomNavigation) | ✅ Done |
 | 8 | Settings (PreferenceFragment + headphone detection) | ⬜ Not started |
 | 9 | Background playback (ForegroundService + notification) | ⬜ Not started |
@@ -155,7 +155,7 @@ com.prime.frequently/
 | `ui/HomeFragment.kt` | Skeleton — Phase 7 |
 | `ui/LibraryFragment.kt` | ✅ Phase 4 — full: adapter, chip filters, search, nav to player |
 | `ui/WavePresetAdapter.kt` | ✅ Phase 4 — ListAdapter, 2-col grid, band gradient thumbnails |
-| `ui/HistoryFragment.kt` | Skeleton — Phase 6 |
+| `ui/HistoryFragment.kt` | ✅ Phase 6 — full: stats, 7-day bar chart, RecyclerView, swipe-to-delete, Clear All |
 | `ui/SettingsFragment.kt` | Skeleton — Phase 8 |
 | `ui/JourneyBuilderFragment.kt` | Skeleton — Phase 11.3 |
 | `audio/SineWaveGenerator.kt` | ✅ Stereo PCM, continuous phase tracking, amplitude=1.0 output |
@@ -163,17 +163,17 @@ com.prime.frequently/
 | `audio/BinauralPlayer.kt` | ✅ Full: AudioTrack MODE_STREAM, MAX_PRIORITY thread, 500ms fade in/out, noise mixing wired |
 | `audio/AudioEngine.kt` | Stub — used in Phase 11.2 (progressive transitions) |
 | `service/AudioForegroundService.kt` | Stub — Phase 9 |
-| `data/SessionRecord.kt` | Data class — Room annotations added in Phase 6 |
+| `data/SessionRecord.kt` | ✅ Phase 6 — @Entity, @PrimaryKey wired |
 | `data/WavePreset.kt` | Data class + WaveCategory enum |
 | `data/FrequencyJourney.kt` | Data class — Phase 11.2 |
 | `data/FrequencyWaypoint.kt` | Data class — Phase 11.2 |
-| `data/AppDatabase.kt` | Stub singleton — Room wired in Phase 6 |
-| `data/SessionDao.kt` | Interface stub — Room annotations Phase 6 |
+| `data/AppDatabase.kt` | ✅ Phase 6 — @Database(SessionRecord), Room.databaseBuilder singleton |
+| `data/SessionDao.kt` | ✅ Phase 6 — @Dao, insert/getAll/deleteById/deleteAll wired |
 | `data/JourneyDao.kt` | Interface stub — Phase 11.3 |
-| `viewmodel/HomeViewModel.kt` | ✅ StateFlows: isPlaying, carrierHz, beatHz, volume, remainingSeconds; delegates to BinauralPlayer |
-| `viewmodel/HistoryViewModel.kt` | Stub — Phase 6 |
+| `viewmodel/HomeViewModel.kt` | ✅ AndroidViewModel; StateFlows wired; auto-saves SessionRecord on stop/complete via SessionRepository |
+| `viewmodel/HistoryViewModel.kt` | ✅ Phase 6 — AndroidViewModel, sessions Flow, stats (total/minutes/streak/weekCounts) |
 | `viewmodel/PresetsViewModel.kt` | ✅ category filter + search query StateFlows |
-| `repository/SessionRepository.kt` | Stub — Phase 6 |
+| `repository/SessionRepository.kt` | ✅ Phase 6 — wired to AppDatabase, all CRUD ops |
 | `repository/PresetRepository.kt` | Delegates to WavePresets constants |
 | `constants/WavePresets.kt` | All 18 presets defined (Delta→Spiritual) |
 | `constants/AppConstants.kt` | Sample rate, buffer size, notification IDs, Hz bounds |
@@ -357,4 +357,4 @@ The app is **dark-only**. No light mode. Background is near-black with a cosmic 
 
 ---
 
-*Last updated: Phase 2 complete — NoiseGenerator: white, pink (Voss-McCartney 7-row), brown all implemented. Mixing already live in BinauralPlayer buffer loop (per-sample, with clip prevention). Builds clean.*
+*Last updated: Phase 6 complete — Room DB wired (SessionRecord @Entity, SessionDao @Dao, AppDatabase @Database). SessionRepository, HistoryViewModel (AndroidViewModel, stats + streak), HistoryAdapter (ListAdapter, swipe-to-delete), HistoryFragment (bar chart, stats grid, Clear All). HomeViewModel upgraded to AndroidViewModel — auto-saves SessionRecord on stop and timer-complete. Builds clean.*

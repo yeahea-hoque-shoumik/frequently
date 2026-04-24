@@ -1,10 +1,13 @@
 package com.prime.frequently.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.prime.frequently.audio.BinauralPlayer
 import com.prime.frequently.audio.NoiseType
+import com.prime.frequently.data.SessionRecord
 import com.prime.frequently.data.WavePreset
+import com.prime.frequently.repository.SessionRepository
 import com.prime.frequently.utils.FrequencyUtils
 import com.prime.frequently.utils.TimeUtils
 import kotlinx.coroutines.Job
@@ -19,18 +22,17 @@ import kotlinx.coroutines.launch
 
 // ── One-shot UI events ────────────────────────────────────────────────────────
 sealed class SessionEvent {
-    /** Timer counted down to zero — show completion UI. */
     object TimerCompleted : SessionEvent()
-    /** User manually stopped the session. */
     object Stopped : SessionEvent()
 }
 
 // ── Timer lifecycle ───────────────────────────────────────────────────────────
 enum class TimerState { IDLE, RUNNING, PAUSED, COMPLETED }
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     private val player = BinauralPlayer()
+    private val sessionRepo = SessionRepository(app)
 
     // ── Current preset ────────────────────────────────────────────────────────
     private val _currentPresetName = MutableStateFlow("")
@@ -58,27 +60,22 @@ class HomeViewModel : ViewModel() {
     private val _timerState = MutableStateFlow(TimerState.IDLE)
     val timerState: StateFlow<TimerState> = _timerState.asStateFlow()
 
-    /** Chosen session duration in seconds. 0 = infinite (no auto-stop). */
     private val _durationSeconds = MutableStateFlow(0)
     val durationSeconds: StateFlow<Int> = _durationSeconds.asStateFlow()
 
-    /** Counts down from durationSeconds to 0. */
     private val _remainingSeconds = MutableStateFlow(0)
     val remainingSeconds: StateFlow<Int> = _remainingSeconds.asStateFlow()
 
-    /** MM:SS string derived from remainingSeconds — ready to bind to a TextView. */
     val remainingFormatted: String
         get() = TimeUtils.secondsToMmSs(_remainingSeconds.value)
 
-    /** Seconds elapsed since session started (for session record in Phase 6). */
     private val _elapsedSeconds = MutableStateFlow(0)
     val elapsedSeconds: StateFlow<Int> = _elapsedSeconds.asStateFlow()
 
-    /** Wall-clock epoch millis when the current session started (Phase 6). */
     var sessionStartTime: Long = 0L
         private set
 
-    // ── One-shot events → UI (SharedFlow, no replay) ─────────────────────────
+    // ── One-shot events ───────────────────────────────────────────────────────
     private val _events = MutableSharedFlow<SessionEvent>()
     val events: SharedFlow<SessionEvent> = _events.asSharedFlow()
 
@@ -125,12 +122,15 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    /** Manual stop — fades audio out and resets timer. */
     fun stop() {
+        val record = buildSessionRecord(completed = false)
         player.fadeOutAndStop()
         _isPlaying.value = false
         cancelTimer()
-        viewModelScope.launch { _events.emit(SessionEvent.Stopped) }
+        viewModelScope.launch {
+            if (record.actualDurationSecs > 0) sessionRepo.insert(record)
+            _events.emit(SessionEvent.Stopped)
+        }
     }
 
     // ── Frequency ─────────────────────────────────────────────────────────────
@@ -170,19 +170,16 @@ class HomeViewModel : ViewModel() {
 
     // ── Timer controls ────────────────────────────────────────────────────────
 
-    /** Set duration from a preset chip (minutes → seconds). */
     fun setDurationMinutes(minutes: Int) {
         _durationSeconds.value = minutes * 60
         _remainingSeconds.value = minutes * 60
     }
 
-    /** Set duration as seconds directly (e.g. from a slider). */
     fun setDurationSeconds(seconds: Int) {
         _durationSeconds.value = seconds
         _remainingSeconds.value = seconds
     }
 
-    /** Clear the timer — playback becomes infinite until manual stop. */
     fun clearDuration() {
         _durationSeconds.value = 0
         _remainingSeconds.value = 0
@@ -196,7 +193,6 @@ class HomeViewModel : ViewModel() {
         timerJob = viewModelScope.launch {
             while (_remainingSeconds.value > 0) {
                 delay(1000L)
-                // Only decrement if not paused — if paused, spin in place
                 if (_timerState.value == TimerState.RUNNING) {
                     _remainingSeconds.value = (_remainingSeconds.value - 1).coerceAtLeast(0)
                     _elapsedSeconds.value += 1
@@ -209,19 +205,41 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun onTimerComplete() {
+        val record = buildSessionRecord(completed = true)
         player.fadeOutAndStop()
         _isPlaying.value = false
         _timerState.value = TimerState.COMPLETED
-        viewModelScope.launch { _events.emit(SessionEvent.TimerCompleted) }
-        // Phase 6: save session record here
+        viewModelScope.launch {
+            sessionRepo.insert(record)
+            _events.emit(SessionEvent.TimerCompleted)
+        }
     }
 
     private fun cancelTimer() {
         timerJob?.cancel()
         timerJob = null
         _timerState.value = TimerState.IDLE
-        _remainingSeconds.value = _durationSeconds.value // reset display
+        _remainingSeconds.value = _durationSeconds.value
         _elapsedSeconds.value = 0
+    }
+
+    private fun buildSessionRecord(completed: Boolean): SessionRecord {
+        val actualDuration = if (_durationSeconds.value > 0) {
+            _elapsedSeconds.value
+        } else {
+            if (sessionStartTime > 0) ((System.currentTimeMillis() - sessionStartTime) / 1000).toInt() else 0
+        }
+        return SessionRecord(
+            startTime = sessionStartTime,
+            plannedDurationSecs = _durationSeconds.value,
+            actualDurationSecs = actualDuration,
+            presetName = _currentPresetName.value.ifEmpty { "Custom" },
+            carrierHz = _carrierHz.value,
+            beatHz = _beatHz.value,
+            noiseType = player.noiseType.name,
+            noiseVolume = player.noiseVolume,
+            completed = completed
+        )
     }
 
     override fun onCleared() {

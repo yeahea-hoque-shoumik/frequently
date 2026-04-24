@@ -1,13 +1,18 @@
 package com.prime.frequently.repository
 
+import android.content.Context
+import com.prime.frequently.data.AppDatabase
 import com.prime.frequently.data.SessionRecord
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 
-// Phase 6: single source of truth for session data between ViewModel and Room
-class SessionRepository {
-    fun getAll(): Flow<List<SessionRecord>> = emptyFlow()
-    suspend fun insert(session: SessionRecord) {}
-    suspend fun deleteById(id: String) {}
-    suspend fun deleteAll() {}
+class SessionRepository(context: Context) {
+    private val dao = AppDatabase.getInstance(context).sessionDao()
+
+    fun getAll(): Flow<List<SessionRecord>> = dao.getAll()
+
+    suspend fun insert(session: SessionRecord) = dao.insert(session)
+
+    suspend fun deleteById(id: String) = dao.deleteById(id)
+
+    suspend fun deleteAll() = dao.deleteAll()
 }

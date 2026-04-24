@@ -1,11 +1,22 @@
 package com.prime.frequently.data
 
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
-// Phase 6: Room DAO — @Dao, @Insert, @Query annotations added when Room is wired up
+@Dao
 interface SessionDao {
-    fun insert(session: SessionRecord)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(session: SessionRecord)
+
+    @Query("SELECT * FROM sessions ORDER BY startTime DESC")
     fun getAll(): Flow<List<SessionRecord>>
-    fun deleteById(id: String)
-    fun deleteAll()
+
+    @Query("DELETE FROM sessions WHERE id = :id")
+    suspend fun deleteById(id: String)
+
+    @Query("DELETE FROM sessions")
+    suspend fun deleteAll()
 }

@@ -1,10 +1,12 @@
 package com.prime.frequently.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.UUID
 
-// Phase 6: Room entity — one row per completed or interrupted session
+@Entity(tableName = "sessions")
 data class SessionRecord(
-    val id: String = UUID.randomUUID().toString(),
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val startTime: Long = 0L,
     val plannedDurationSecs: Int = 0,
     val actualDurationSecs: Int = 0,

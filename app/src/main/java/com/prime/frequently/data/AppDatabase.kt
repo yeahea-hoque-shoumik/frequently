@@ -1,17 +1,26 @@
 package com.prime.frequently.data
 
 import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
-// Phase 6: RoomDatabase singleton — @Database annotation and Room.databaseBuilder added then
-object AppDatabase {
-    private var instance: AppDatabase? = null
+@Database(entities = [SessionRecord::class], version = 1, exportSchema = false)
+abstract class AppDatabase : RoomDatabase() {
 
-    fun getInstance(context: Context): AppDatabase {
-        return instance ?: synchronized(this) {
-            instance ?: AppDatabase.also { instance = it }
-        }
+    abstract fun sessionDao(): SessionDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        fun getInstance(context: Context): AppDatabase =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "frequently_db"
+                ).build().also { INSTANCE = it }
+            }
     }
-
-    fun sessionDao(): SessionDao { throw NotImplementedError("Phase 6") }
-    fun journeyDao(): JourneyDao { throw NotImplementedError("Phase 11.3") }
 }
