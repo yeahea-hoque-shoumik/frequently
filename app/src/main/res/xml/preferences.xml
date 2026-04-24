@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ── Playback ─────────────────────────────────────────────────────────── -->
+    <PreferenceCategory android:title="@string/pref_section_playback">
+
+        <SwitchPreferenceCompat
+            android:key="pref_keep_screen_on"
+            android:title="@string/pref_keep_screen_on"
+            android:summary="@string/pref_keep_screen_on_sub"
+            android:defaultValue="true" />
+
+        <SwitchPreferenceCompat
+            android:key="pref_headphone_warning"
+            android:title="@string/pref_headphone_warning"
+            android:summary="@string/pref_headphone_warning_sub"
+            android:defaultValue="true" />
+
+        <SeekBarPreference
+            android:key="pref_carrier_hz"
+            android:title="@string/pref_carrier_hz"
+            android:summary="@string/pref_carrier_hz_sub"
+            android:defaultValue="200"
+            android:min="100"
+            android:max="500" />
+
+        <ListPreference
+            android:key="pref_noise_type"
+            android:title="@string/pref_noise_type"
+            android:summary="%s"
+            android:entries="@array/noise_type_entries"
+            android:entryValues="@array/noise_type_values"
+            android:defaultValue="NONE" />
+
+        <ListPreference
+            android:key="pref_sample_rate"
+            android:title="@string/pref_sample_rate"
+            android:summary="%s"
+            android:entries="@array/sample_rate_entries"
+            android:entryValues="@array/sample_rate_values"
+            android:defaultValue="44100" />
+
+    </PreferenceCategory>
+
+    <!-- ── Session ──────────────────────────────────────────────────────────── -->
+    <PreferenceCategory android:title="@string/pref_section_session">
+
+        <SwitchPreferenceCompat
+            android:key="pref_auto_fade"
+            android:title="@string/pref_auto_fade"
+            android:summary="@string/pref_auto_fade_sub"
+            android:defaultValue="true" />
+
+        <SwitchPreferenceCompat
+            android:key="pref_max_vol"
+            android:title="@string/pref_max_vol"
+            android:summary="@string/pref_max_vol_sub"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <!-- ── Data ─────────────────────────────────────────────────────────────── -->
+    <PreferenceCategory android:title="@string/pref_section_data">
+
+        <Preference
+            android:key="pref_export"
+            android:title="@string/pref_export"
+            android:summary="@string/pref_export_sub" />
+
+        <Preference
+            android:key="pref_clear_data"
+            android:title="@string/pref_clear_data"
+            android:summary="@string/pref_clear_data_sub" />
+
+    </PreferenceCategory>
+
+    <!-- ── About ─────────────────────────────────────────────────────────────── -->
+    <PreferenceCategory android:title="@string/pref_section_about">
+
+        <Preference
+            android:key="pref_version"
+            android:title="@string/version_info"
+            android:enabled="false"
+            android:selectable="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

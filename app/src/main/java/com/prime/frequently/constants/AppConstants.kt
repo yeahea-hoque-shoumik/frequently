@@ -18,4 +18,15 @@ object AppConstants {
 
     // Timer preset chips shown in UI (Phase 3 / 7)
     val TIMER_PRESET_MINUTES = listOf(5, 10, 20, 30, 45, 60, 90)
+
+    // Preference keys — must match android:key in res/xml/preferences.xml
+    const val PREF_KEEP_SCREEN_ON    = "pref_keep_screen_on"
+    const val PREF_HEADPHONE_WARNING = "pref_headphone_warning"
+    const val PREF_CARRIER_HZ        = "pref_carrier_hz"
+    const val PREF_NOISE_TYPE        = "pref_noise_type"
+    const val PREF_SAMPLE_RATE       = "pref_sample_rate"
+    const val PREF_AUTO_FADE         = "pref_auto_fade"
+    const val PREF_MAX_VOL           = "pref_max_vol"
+    const val PREF_EXPORT            = "pref_export"
+    const val PREF_CLEAR_DATA        = "pref_clear_data"
 }

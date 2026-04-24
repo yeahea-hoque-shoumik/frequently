@@ -1,9 +1,16 @@
 package com.prime.frequently.ui
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.media.AudioDeviceInfo
+import android.media.AudioManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -12,6 +19,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
+import com.google.android.material.snackbar.Snackbar
 import com.prime.frequently.R
 import com.prime.frequently.constants.AppConstants
 import com.prime.frequently.databinding.FragmentPlayerBinding
@@ -25,6 +34,15 @@ class PlayerFragment : Fragment() {
     private val vm: HomeViewModel by activityViewModels()
     private var _b: FragmentPlayerBinding? = null
     private val b get() = _b!!
+
+    // Pause playback when wired headphones are unplugged mid-session.
+    private val headphoneReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == AudioManager.ACTION_AUDIO_BECOMING_NOISY && vm.isPlaying.value) {
+                vm.pause()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,8 +59,20 @@ class PlayerFragment : Fragment() {
         val carrierRange = (AppConstants.CARRIER_HZ_MAX - AppConstants.CARRIER_HZ_MIN).toInt()
         b.sliderCarrier.max = carrierRange
 
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
         b.btnBack.setOnClickListener { findNavController().navigateUp() }
-        b.btnPlayPause.setOnClickListener { vm.togglePlayPause() }
+
+        b.btnPlayPause.setOnClickListener {
+            // Warn on play start if headphones are not connected (and pref is enabled).
+            if (!vm.isPlaying.value) {
+                val warnEnabled = prefs.getBoolean(AppConstants.PREF_HEADPHONE_WARNING, true)
+                if (warnEnabled && !areHeadphonesConnected()) {
+                    Snackbar.make(b.root, R.string.snackbar_no_headphones, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            vm.togglePlayPause()
+        }
 
         b.sliderCarrier.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(sb: SeekBar, progress: Int, fromUser: Boolean) {
@@ -67,6 +97,13 @@ class PlayerFragment : Fragment() {
                         b.btnPlayPause.setImageResource(
                             if (playing) R.drawable.ic_pause else R.drawable.ic_play
                         )
+                        // Keep screen on while playing if pref is enabled.
+                        val keepOn = prefs.getBoolean(AppConstants.PREF_KEEP_SCREEN_ON, true)
+                        if (playing && keepOn) {
+                            requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                        } else {
+                            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                        }
                     }
                 }
                 launch {
@@ -102,7 +139,7 @@ class PlayerFragment : Fragment() {
                 }
                 launch {
                     vm.remainingSeconds.collect { secs ->
-                        b.tvDuration.text = if (secs > 0) "-${TimeUtils.secondsToMmSs(secs)}" else "\u221e"
+                        b.tvDuration.text = if (secs > 0) "-${TimeUtils.secondsToMmSs(secs)}" else "∞"
                     }
                 }
                 launch {
@@ -118,8 +155,33 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        requireContext().registerReceiver(
+            headphoneReceiver,
+            IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY),
+            Context.RECEIVER_NOT_EXPORTED
+        )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        requireContext().unregisterReceiver(headphoneReceiver)
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _b = null
+    }
+
+    private fun areHeadphonesConnected(): Boolean {
+        val am = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        return am.getDevices(AudioManager.GET_DEVICES_OUTPUTS).any {
+            it.type == AudioDeviceInfo.TYPE_WIRED_HEADPHONES ||
+            it.type == AudioDeviceInfo.TYPE_WIRED_HEADSET ||
+            it.type == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP ||
+            it.type == AudioDeviceInfo.TYPE_BLUETOOTH_SCO
+        }
     }
 }

@@ -73,26 +73,60 @@
     <string name="onboarding_cta">Put on headphones &amp; begin</string>
     <string name="onboarding_disclaimer">Binaural beats require stereo headphones to work.</string>
 
-    <!-- Settings -->
-    <string name="settings_title">Settings</string>
-    <string name="pref_hq_audio">High-quality audio</string>
-    <string name="pref_hq_audio_sub">32-bit float synthesis</string>
-    <string name="pref_auto_fade">Auto fade in/out</string>
-    <string name="pref_auto_fade_sub">10s ramp at session edges</string>
-    <string name="pref_crossfade">Crossfade between segments</string>
-    <string name="pref_crossfade_sub">3s smooth transitions</string>
+    <!-- Settings — section headers -->
+    <string name="pref_section_playback">Playback</string>
+    <string name="pref_section_session">Session</string>
+    <string name="pref_section_data">Data</string>
+    <string name="pref_section_about">About</string>
+
+    <!-- Settings — preferences -->
+    <string name="pref_keep_screen_on">Keep screen on</string>
+    <string name="pref_keep_screen_on_sub">Prevents display from sleeping during a session</string>
+    <string name="pref_headphone_warning">Headphone warning</string>
+    <string name="pref_headphone_warning_sub">Alert when no headphones are detected at playback start</string>
+    <string name="pref_carrier_hz">Default carrier Hz</string>
+    <string name="pref_carrier_hz_sub">Starting base frequency for new sessions (100–500 Hz)</string>
+    <string name="pref_noise_type">Default background noise</string>
+    <string name="pref_sample_rate">Sample rate</string>
+    <string name="pref_auto_fade">Auto fade in / out</string>
+    <string name="pref_auto_fade_sub">500 ms ramp at session start and end</string>
     <string name="pref_max_vol">Max volume safety</string>
-    <string name="pref_max_vol_sub">Limit to 85 dB</string>
-    <string name="pref_default_timer">Default timer</string>
-    <string name="pref_screen_dim">Screen dim while playing</string>
-    <string name="pref_screen_dim_sub">Lower distraction</string>
-    <string name="pref_session_history">Session history</string>
-    <string name="pref_session_history_sub">Kept for 90 days</string>
+    <string name="pref_max_vol_sub">Cap output at 85 dB to protect hearing</string>
     <string name="pref_export">Export saved tracks</string>
-    <string name="pref_export_sub">.json bundle · on-device</string>
+    <string name="pref_export_sub">.json bundle · on-device only</string>
     <string name="pref_clear_data">Clear session data</string>
-    <string name="pref_clear_data_sub">Cannot be undone</string>
+    <string name="pref_clear_data_sub">Permanently delete all session history</string>
     <string name="version_info">FREQUENTLY v1.0 · BUILD 1</string>
+
+    <!-- Settings — dialogs / actions -->
+    <string name="dialog_clear_data_title">Clear all session data?</string>
+    <string name="dialog_clear_data_msg">This will permanently delete your entire session history. This cannot be undone.</string>
+    <string name="action_clear">Clear</string>
+
+    <!-- Snackbar -->
+    <string name="snackbar_no_headphones">Binaural beats require headphones — plug in a pair for the full effect</string>
+
+    <!-- String arrays for ListPreference -->
+    <string-array name="noise_type_entries">
+        <item>None</item>
+        <item>White noise</item>
+        <item>Pink noise</item>
+        <item>Brown noise</item>
+    </string-array>
+    <string-array name="noise_type_values">
+        <item>NONE</item>
+        <item>WHITE</item>
+        <item>PINK</item>
+        <item>BROWN</item>
+    </string-array>
+    <string-array name="sample_rate_entries">
+        <item>44100 Hz · Standard</item>
+        <item>48000 Hz · High quality</item>
+    </string-array>
+    <string-array name="sample_rate_values">
+        <item>44100</item>
+        <item>48000</item>
+    </string-array>
 
     <!-- Screen titles -->
     <string name="screen_builder">Journey Builder</string>
