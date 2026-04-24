@@ -56,6 +56,10 @@
     <dimen name="text_micro">10sp</dimen>
     <dimen name="text_nano">9sp</dimen>
 
+    <!-- Custom Hz keypad -->
+    <dimen name="keypad_btn_height">60dp</dimen>
+    <dimen name="keypad_gap">6dp</dimen>
+
     <!-- Bar chart -->
     <dimen name="chart_height">90dp</dimen>
 

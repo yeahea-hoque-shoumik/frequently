@@ -57,7 +57,11 @@
         android:id="@+id/customHzFragment"
         android:name="com.prime.frequently.ui.CustomHzFragment"
         android:label="@string/screen_custom_hz"
-        tools:layout="@layout/fragment_custom_hz" />
+        tools:layout="@layout/fragment_custom_hz">
+        <action
+            android:id="@+id/action_customHz_to_player"
+            app:destination="@id/playerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/timerFragment"

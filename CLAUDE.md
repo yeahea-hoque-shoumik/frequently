@@ -127,7 +127,7 @@ com.prime.frequently/
 | 2 | Background noise mixer (NoiseGenerator + mixing) | ✅ Done |
 | 3 | Timer system (coroutine countdown + auto-stop) | ✅ Done |
 | 4 | Preset wave categories (data model + RecyclerView UI) | ✅ Done |
-| 5 | Custom Hz input (sliders + live preview) | ⬜ Not started |
+| 5 | Custom Hz input (sliders + live preview) | ✅ Done |
 | 6 | Session history (Room DB + HistoryFragment) | ⬜ Not started |
 | 7 | Main UI (HomeFragment + BottomNavigation) | ✅ Done |
 | 8 | Settings (PreferenceFragment + headphone detection) | ⬜ Not started |

@@ -4,14 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:background="@color/bg_0"
-    android:paddingHorizontal="@dimen/spacing_lg">
+    android:background="@color/bg_0">
 
-    <!-- Back + title bar -->
+    <!-- Header -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/screen_padding_h"
         android:paddingTop="@dimen/spacing_xl"
         android:paddingBottom="@dimen/spacing_md">
 
@@ -36,88 +35,314 @@
 
     </RelativeLayout>
 
-    <!-- Hz display -->
-    <LinearLayout
+    <!-- Scrollable content -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@drawable/bg_card"
-        android:padding="@dimen/spacing_xl"
-        android:layout_marginTop="@dimen/spacing_lg">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/tv_hz_display"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/custom_hz_default"
-            android:textColor="@color/ink"
-            android:textSize="64sp"
-            android:fontFamily="monospace" />
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/screen_padding_h"
+            android:paddingBottom="@dimen/spacing_xl">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/unit_hz"
-            android:textColor="@color/ink_dim"
-            android:textSize="16sp" />
+            <!-- BASE CARRIER label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_base_carrier"
+                android:textColor="@color/ink_mute"
+                android:textSize="@dimen/text_micro"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.10"
+                android:textAllCaps="true"
+                android:gravity="center" />
 
-        <TextView
-            android:id="@+id/tv_band_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_sm"
-            android:textColor="@color/violet"
-            android:textSize="14sp" />
+            <!-- Large carrier Hz display -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:orientation="horizontal"
+                android:gravity="bottom">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_carrier_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="200"
+                    android:textSize="72sp"
+                    android:fontFamily="monospace"
+                    android:textColor="@color/violet_2"
+                    android:includeFontPadding="false" />
 
-    <!-- Slider -->
-    <SeekBar
-        android:id="@+id/slider_hz"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_xl"
-        android:max="100"
-        android:thumbTint="@color/violet"
-        android:progressTint="@color/violet"
-        android:progressBackgroundTint="@color/line_2" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_sm"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/unit_hz"
+                    android:textColor="@color/ink_dim"
+                    android:textSize="20sp"
+                    android:fontFamily="monospace" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_xs">
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/custom_hz_min"
-            android:textColor="@color/ink_mute"
-            android:textSize="11sp"
-            android:fontFamily="monospace" />
+            <!-- Keypad: 4 rows of 3 buttons populated in fragment code -->
+            <LinearLayout
+                android:id="@+id/keypad_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:orientation="vertical" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@string/custom_hz_max"
-            android:textColor="@color/ink_mute"
-            android:textSize="11sp"
-            android:fontFamily="monospace" />
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/spacing_xl"
+                android:background="@color/line" />
 
-    </RelativeLayout>
+            <!-- BINAURAL BEAT label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_binaural_beat"
+                android:textColor="@color/ink_mute"
+                android:textSize="@dimen/text_micro"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.10"
+                android:textAllCaps="true"
+                android:gravity="center" />
 
-    <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
+            <!-- Beat Hz display -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:orientation="horizontal"
+                android:gravity="bottom">
 
-    <!-- Play button -->
-    <ImageButton
+                <TextView
+                    android:id="@+id/tv_beat_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7.8"
+                    android:textSize="44sp"
+                    android:textColor="@color/ink"
+                    android:fontFamily="monospace"
+                    android:includeFontPadding="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_sm"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/unit_hz"
+                    android:textColor="@color/ink_dim"
+                    android:textSize="14sp"
+                    android:fontFamily="monospace" />
+
+            </LinearLayout>
+
+            <!-- Beat slider -->
+            <SeekBar
+                android:id="@+id/slider_beat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:max="99"
+                android:progress="14"
+                android:thumbTint="@color/violet"
+                android:progressTint="@color/violet"
+                android:progressBackgroundTint="@color/line_2" />
+
+            <!-- Beat range labels -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="0.5 Hz"
+                    android:textColor="@color/ink_mute"
+                    android:textSize="@dimen/text_caption"
+                    android:fontFamily="monospace" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="50 Hz"
+                    android:textColor="@color/ink_mute"
+                    android:textSize="@dimen/text_caption"
+                    android:fontFamily="monospace" />
+
+            </RelativeLayout>
+
+            <!-- Live preview card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg"
+                android:background="@drawable/bg_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Left channel -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="L"
+                            android:textColor="@color/ink_mute"
+                            android:textSize="@dimen/text_micro"
+                            android:fontFamily="monospace" />
+
+                        <TextView
+                            android:id="@+id/tv_left_hz"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/ink"
+                            android:textSize="@dimen/text_body_lg"
+                            android:fontFamily="monospace" />
+
+                    </LinearLayout>
+
+                    <!-- Beat delta (center) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Δ"
+                            android:textColor="@color/ink_mute"
+                            android:textSize="@dimen/text_micro"
+                            android:fontFamily="monospace" />
+
+                        <TextView
+                            android:id="@+id/tv_beat_preview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/violet_2"
+                            android:textSize="@dimen/text_body_lg"
+                            android:fontFamily="monospace" />
+
+                    </LinearLayout>
+
+                    <!-- Right channel -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R"
+                            android:textColor="@color/ink_mute"
+                            android:textSize="@dimen/text_micro"
+                            android:fontFamily="monospace" />
+
+                        <TextView
+                            android:id="@+id/tv_right_hz"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/ink"
+                            android:textSize="@dimen/text_body_lg"
+                            android:fontFamily="monospace" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Wave band label -->
+                <TextView
+                    android:id="@+id/tv_band_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:textColor="@color/ink_mute"
+                    android:textSize="@dimen/text_caption"
+                    android:fontFamily="monospace"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08" />
+
+            </LinearLayout>
+
+            <!-- Quick recall label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:text="@string/label_quick_recall"
+                android:textColor="@color/ink_mute"
+                android:textSize="@dimen/text_micro"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.08"
+                android:textAllCaps="true" />
+
+            <!-- Quick recall chips row -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/chip_group_recall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Play button fixed at bottom -->
+    <TextView
         android:id="@+id/btn_play"
-        android:layout_width="@dimen/play_btn_size"
-        android:layout_height="@dimen/play_btn_size"
-        android:layout_marginBottom="@dimen/spacing_xl"
-        android:src="@drawable/ic_play"
-        android:background="@drawable/bg_play_button"
-        android:contentDescription="@string/action_play" />
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="@dimen/screen_padding_h"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_marginBottom="@dimen/spacing_lg"
+        android:gravity="center"
+        android:text="@string/action_play"
+        android:textColor="@color/bg_1"
+        android:textSize="@dimen/text_body"
+        android:fontFamily="sans-serif-medium"
+        android:background="@drawable/bg_button_primary"
+        android:clickable="true"
+        android:focusable="true" />
 
 </LinearLayout>
