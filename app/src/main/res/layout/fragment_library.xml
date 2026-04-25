@@ -167,6 +167,19 @@
                     android:gravity="center"
                     android:background="@drawable/bg_chip" />
 
+                <TextView
+                    android:id="@+id/chip_journey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/chip_height"
+                    android:layout_marginStart="@dimen/spacing_sm"
+                    android:paddingHorizontal="@dimen/spacing_md"
+                    android:text="@string/band_journey"
+                    android:textColor="@color/ink_dim"
+                    android:textSize="@dimen/text_body_sm"
+                    android:fontFamily="monospace"
+                    android:gravity="center"
+                    android:background="@drawable/bg_chip" />
+
             </LinearLayout>
         </HorizontalScrollView>
 

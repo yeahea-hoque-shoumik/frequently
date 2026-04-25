@@ -39,7 +39,11 @@ class WavePresetAdapter(
         gd.cornerRadius = ctx.resources.getDimension(R.dimen.radius_card_sm)
         b.thumbnail.background = gd
 
-        b.tvBandHz.text = "${preset.category.name} · ${"%.1f".format(preset.beatHz)} Hz"
+        b.tvBandHz.text = if (preset.journey != null) {
+            "JOURNEY · ${preset.recommendedDurationMin} min"
+        } else {
+            "${preset.category.name} · ${"%.1f".format(preset.beatHz)} Hz"
+        }
         b.tvBandHz.setTextColor(accent)
         b.tvName.text = preset.name
         b.tvDuration.text = "${preset.recommendedDurationMin} min"
@@ -59,6 +63,7 @@ class WavePresetAdapter(
             WaveCategory.BETA     -> Triple(R.color.band_beta_hi,  R.color.band_beta_lo,  R.color.cyan_accent)
             WaveCategory.GAMMA    -> Triple(R.color.band_gamma_hi, R.color.band_gamma_lo, R.color.amber_accent)
             WaveCategory.SPIRITUAL -> Triple(R.color.band_theta_hi, R.color.band_theta_lo, R.color.magenta_accent)
+            WaveCategory.JOURNEY   -> Triple(R.color.band_theta_hi, R.color.band_delta_hi,  R.color.violet_2)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.prime.frequently.constants
 
 import com.prime.frequently.audio.NoiseType
+import com.prime.frequently.data.JourneyPresets
 import com.prime.frequently.data.WaveCategory
 import com.prime.frequently.data.WavePreset
 
@@ -120,7 +121,48 @@ object WavePresets {
         description = "Deepen the state of remembrance", recommendedDurationMin = 15
     )
 
+    // Journeys (Phase 11.2) — progressive multi-phase sessions
+    private val JOURNEY_FLOW_STATE = WavePreset(
+        id = "journey_flow_state",
+        name = "Flow State",
+        category = WaveCategory.JOURNEY,
+        carrierHz = 300.0, beatHz = 18.0,
+        description = "Beta → Alpha → Theta progressive journey for peak creative flow",
+        recommendedDurationMin = 75,
+        journey = JourneyPresets.FLOW_STATE
+    )
+    private val JOURNEY_WIND_DOWN = WavePreset(
+        id = "journey_wind_down",
+        name = "Wind Down",
+        category = WaveCategory.JOURNEY,
+        carrierHz = 200.0, beatHz = 10.0,
+        description = "Alpha → Theta → Delta sleep preparation with gentle noise fade",
+        noiseType = NoiseType.PINK, noiseVolume = 0.3f,
+        recommendedDurationMin = 40,
+        journey = JourneyPresets.WIND_DOWN
+    )
+    private val JOURNEY_DEEP_MEDITATION = WavePreset(
+        id = "journey_deep_meditation",
+        name = "Deep Meditation",
+        category = WaveCategory.JOURNEY,
+        carrierHz = 200.0, beatHz = 10.0,
+        description = "Alpha → Theta journey for deep meditative states",
+        recommendedDurationMin = 45,
+        journey = JourneyPresets.DEEP_MEDITATION
+    )
+    private val JOURNEY_STUDY = WavePreset(
+        id = "journey_study",
+        name = "Study Session",
+        category = WaveCategory.JOURNEY,
+        carrierHz = 200.0, beatHz = 10.0,
+        description = "Alpha warm-up → sustained Beta focus with pink noise",
+        noiseType = NoiseType.PINK, noiseVolume = 0.3f,
+        recommendedDurationMin = 90,
+        journey = JourneyPresets.STUDY_SESSION
+    )
+
     val ALL: List<WavePreset> = listOf(
+        JOURNEY_FLOW_STATE, JOURNEY_WIND_DOWN, JOURNEY_DEEP_MEDITATION, JOURNEY_STUDY,
         DEEP_SLEEP, HEALING_REST,
         DEEP_MEDITATION, CREATIVE_FLOW, INTUITION,
         CALM_AWARENESS, RELAXED_FOCUS, DREAMY_STATE,

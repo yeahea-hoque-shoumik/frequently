@@ -130,19 +130,19 @@ com.prime.frequently/
 | 5 | Custom Hz input (sliders + live preview) | ✅ Done |
 | 6 | Session history (Room DB + HistoryFragment) | ✅ Done |
 | 7 | Main UI (HomeFragment + BottomNavigation) | ✅ Done |
-| 8 | Settings (PreferenceFragment + headphone detection) | ⬜ Not started |
-| 9 | Background playback (ForegroundService + notification) | ⬜ Not started |
+| 8 | Settings (PreferenceFragment + headphone detection) | ✅ Done |
+| 9 | Background playback (ForegroundService + notification) | ✅ Done |
 | 10 | Polish + testing + release APK | ⬜ Not started |
-| 11.1 | Session Intent System | ⬜ Not started |
-| 11.2 | Progressive Frequency Transitions | ⬜ Not started |
+| 11.1 | Session Intent System | ✅ Done — SessionIntent enum, IntentRecommendationEngine, SessionIntentBottomSheet (tap ⋯ in Player) |
+| 11.2 | Progressive Frequency Transitions | ✅ Done — AudioEngine interpolation, JourneyPresets (Flow State / Wind Down / Deep Meditation / Study Session), journey tick coroutine in HomeViewModel |
 | 11.3 | Journey Builder | ⬜ Not started |
 | 11.4 | Prayer-Aligned Presets | ⬜ Not started |
 | 11.5 | Isochronic Tone Mode | ⬜ Not started |
 | 11.6 | Brain State Estimator | ⬜ Not started |
 | 11.7 | Streak + Habit Tracker | ⬜ Not started |
-| 11.8 | Wind Down Stack | ⬜ Not started |
+| 11.8 | Wind Down Stack | ✅ Done — built-in journey preset in Library (Journey tab) + surfaced via WIND_DOWN intent |
 | 11.9 | Sensitivity Calibration | ⬜ Not started |
-| 11.10 | Privacy-First Polish | ⬜ Not started |
+| 11.10 | Privacy-First Polish | ✅ Done — no INTERNET permission, all data local, export preference wired in Settings |
 
 ---
 
@@ -161,16 +161,20 @@ com.prime.frequently/
 | `audio/SineWaveGenerator.kt` | ✅ Stereo PCM, continuous phase tracking, amplitude=1.0 output |
 | `audio/NoiseGenerator.kt` | ✅ White, pink (Voss-McCartney 7-row), brown — all three generators complete |
 | `audio/BinauralPlayer.kt` | ✅ Full: AudioTrack MODE_STREAM, MAX_PRIORITY thread, 500ms fade in/out, noise mixing wired |
-| `audio/AudioEngine.kt` | Stub — used in Phase 11.2 (progressive transitions) |
-| `service/AudioForegroundService.kt` | Stub — Phase 9 |
+| `audio/AudioEngine.kt` | ✅ Phase 11.2 — computeHz() linear interpolation + computeNoiseState() for waypoint transitions |
+| `service/AudioForegroundService.kt` | ✅ Phase 9 — LocalBinder, audio focus, headphone receiver, notification (Pause/Resume/Stop actions) |
 | `data/SessionRecord.kt` | ✅ Phase 6 — @Entity, @PrimaryKey wired |
 | `data/WavePreset.kt` | Data class + WaveCategory enum |
-| `data/FrequencyJourney.kt` | Data class — Phase 11.2 |
-| `data/FrequencyWaypoint.kt` | Data class — Phase 11.2 |
+| `data/FrequencyJourney.kt` | ✅ Phase 11.2 — includes totalDurationMinutes |
+| `data/FrequencyWaypoint.kt` | ✅ Phase 11.2 — includes noiseType + noiseVolume per waypoint |
+| `data/JourneyPresets.kt` | ✅ Phase 11.2 — FLOW_STATE, WIND_DOWN, DEEP_MEDITATION, STUDY_SESSION built-in journeys |
+| `data/SessionIntent.kt` | ✅ Phase 11.1 — 7 intents with label, description, emoji |
+| `data/IntentRecommendation.kt` | ✅ Phase 11.1 — recommendation data class |
+| `repository/IntentRecommendationEngine.kt` | ✅ Phase 11.1 — maps SessionIntent → IntentRecommendation (journey or static Hz) |
 | `data/AppDatabase.kt` | ✅ Phase 6 — @Database(SessionRecord), Room.databaseBuilder singleton |
 | `data/SessionDao.kt` | ✅ Phase 6 — @Dao, insert/getAll/deleteById/deleteAll wired |
 | `data/JourneyDao.kt` | Interface stub — Phase 11.3 |
-| `viewmodel/HomeViewModel.kt` | ✅ AndroidViewModel; StateFlows wired; auto-saves SessionRecord on stop/complete via SessionRepository |
+| `viewmodel/HomeViewModel.kt` | ✅ AndroidViewModel; binds to AudioForegroundService; StateFlows wired; auto-saves SessionRecord on stop/complete; Phase 11.1 applyIntent(); Phase 11.2 startJourney() + journey tick coroutine |
 | `viewmodel/HistoryViewModel.kt` | ✅ Phase 6 — AndroidViewModel, sessions Flow, stats (total/minutes/streak/weekCounts) |
 | `viewmodel/PresetsViewModel.kt` | ✅ category filter + search query StateFlows |
 | `repository/SessionRepository.kt` | ✅ Phase 6 — wired to AppDatabase, all CRUD ops |
@@ -206,7 +210,7 @@ com.prime.frequently/
 | `navigation/nav_graph.xml` | Full nav graph — 9 fragments, all actions wired |
 | `menu/bottom_nav_menu.xml` | 5-item bottom nav (Library, Player, Build, History, Settings) |
 | `drawable/` | 37 drawables — all icons (ic_*) + all backgrounds (bg_*) + color selectors |
-| `AndroidManifest.xml` | Single activity, no permissions yet (Phase 9 adds audio/notification permissions) |
+| `AndroidManifest.xml` | ✅ Phase 9 — FOREGROUND_SERVICE, FOREGROUND_SERVICE_MEDIA_PLAYBACK, WAKE_LOCK, POST_NOTIFICATIONS; service declared |
 
 ### Docs
 | File | Notes |
@@ -357,4 +361,4 @@ The app is **dark-only**. No light mode. Background is near-black with a cosmic 
 
 ---
 
-*Last updated: Phase 6 complete — Room DB wired (SessionRecord @Entity, SessionDao @Dao, AppDatabase @Database). SessionRepository, HistoryViewModel (AndroidViewModel, stats + streak), HistoryAdapter (ListAdapter, swipe-to-delete), HistoryFragment (bar chart, stats grid, Clear All). HomeViewModel upgraded to AndroidViewModel — auto-saves SessionRecord on stop and timer-complete. Builds clean.*
+*Last updated: Phase 9 completed*

@@ -60,5 +60,6 @@ class HistoryAdapter : ListAdapter<SessionRecord, HistoryAdapter.VH>(DIFF) {
         WaveCategory.BETA     -> R.color.band_beta_hi
         WaveCategory.GAMMA    -> R.color.band_gamma_hi
         WaveCategory.SPIRITUAL -> R.color.violet
+        WaveCategory.JOURNEY   -> R.color.violet_2
     }
 }

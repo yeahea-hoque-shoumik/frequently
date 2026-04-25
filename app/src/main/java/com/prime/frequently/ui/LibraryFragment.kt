@@ -59,7 +59,8 @@ class LibraryFragment : Fragment() {
             b.chipAlpha to WaveCategory.ALPHA,
             b.chipBeta to WaveCategory.BETA,
             b.chipGamma to WaveCategory.GAMMA,
-            b.chipSpiritual to WaveCategory.SPIRITUAL
+            b.chipSpiritual to WaveCategory.SPIRITUAL,
+            b.chipJourney to WaveCategory.JOURNEY
         )
         chipMap.forEach { (chip, category) ->
             chip.setOnClickListener { vm.selectCategory(category) }

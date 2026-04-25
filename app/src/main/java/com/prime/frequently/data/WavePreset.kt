@@ -2,7 +2,7 @@ package com.prime.frequently.data
 
 import com.prime.frequently.audio.NoiseType
 
-enum class WaveCategory { DELTA, THETA, ALPHA, BETA, GAMMA, SPIRITUAL }
+enum class WaveCategory { DELTA, THETA, ALPHA, BETA, GAMMA, SPIRITUAL, JOURNEY }
 
 data class WavePreset(
     val id: String,
@@ -15,5 +15,6 @@ data class WavePreset(
     val noiseType: NoiseType = NoiseType.NONE,
     val noiseVolume: Float = 0f,
     val recommendedDurationMin: Int = 20,
-    val colorRes: Int = 0
+    val colorRes: Int = 0,
+    val journey: FrequencyJourney? = null
 )

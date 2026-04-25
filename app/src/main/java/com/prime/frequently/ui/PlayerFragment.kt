@@ -1,9 +1,6 @@
 package com.prime.frequently.ui
 
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.media.AudioDeviceInfo
 import android.media.AudioManager
 import android.os.Bundle
@@ -35,15 +32,6 @@ class PlayerFragment : Fragment() {
     private var _b: FragmentPlayerBinding? = null
     private val b get() = _b!!
 
-    // Pause playback when wired headphones are unplugged mid-session.
-    private val headphoneReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == AudioManager.ACTION_AUDIO_BECOMING_NOISY && vm.isPlaying.value) {
-                vm.pause()
-            }
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,6 +50,10 @@ class PlayerFragment : Fragment() {
         val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         b.btnBack.setOnClickListener { findNavController().navigateUp() }
+
+        b.btnMore.setOnClickListener {
+            SessionIntentBottomSheet().show(parentFragmentManager, "intent")
+        }
 
         b.btnPlayPause.setOnClickListener {
             // Warn on play start if headphones are not connected (and pref is enabled).
@@ -155,18 +147,8 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        requireContext().registerReceiver(
-            headphoneReceiver,
-            IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY),
-            Context.RECEIVER_NOT_EXPORTED
-        )
-    }
-
     override fun onStop() {
         super.onStop()
-        requireContext().unregisterReceiver(headphoneReceiver)
         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 

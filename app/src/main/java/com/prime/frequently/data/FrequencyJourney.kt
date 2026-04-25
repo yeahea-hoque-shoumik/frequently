@@ -8,5 +8,6 @@ data class FrequencyJourney(
     val name: String,
     val waypoints: List<FrequencyWaypoint>,
     val noiseType: NoiseType = NoiseType.NONE,
-    val noiseVolume: Float = 0f
+    val noiseVolume: Float = 0f,
+    val totalDurationMinutes: Int = 0
 )

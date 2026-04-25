@@ -179,6 +179,11 @@
     <string name="band_beta">Beta</string>
     <string name="band_gamma">Gamma</string>
     <string name="band_spiritual">Spiritual</string>
+    <string name="band_journey">Journey</string>
+
+    <!-- Session Intent bottom sheet -->
+    <string name="intent_sheet_title">What\'s your goal?</string>
+    <string name="intent_sheet_subtitle">We\'ll set the optimal frequency for you</string>
 
     <!-- Content descriptions -->
     <string name="cd_back">Back</string>

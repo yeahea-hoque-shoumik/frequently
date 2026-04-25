@@ -258,6 +258,7 @@ class CustomHzFragment : Fragment() {
         WaveCategory.BETA     -> "Beta  ·  13 – 30 Hz  ·  Active focus"
         WaveCategory.GAMMA    -> "Gamma  ·  30+ Hz  ·  Peak cognition"
         WaveCategory.SPIRITUAL -> "Spiritual"
+        WaveCategory.JOURNEY   -> "Journey  ·  multi-band  ·  Progressive"
     }
 
     override fun onDestroyView() {
